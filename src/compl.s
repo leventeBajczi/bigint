@@ -1,0 +1,5 @@
+.globl compl
+
+.text
+compl:
+    

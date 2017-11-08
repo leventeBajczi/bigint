@@ -17,7 +17,8 @@ ok:
 
 .text
 _start:
-    MOV $0xfffff, %rdi #Size of the memory to allocate
+    MOV $0x800,  %rsi #Key length
+    MOV $0x01000000, %rdi #Size of the memory to allocate, 10 x keysize is recommended
     call init 
     
     CMP $1, %rax
@@ -33,6 +34,7 @@ endok:
     MOV $21, %rdx
     call print
 end:
+    jmp end
     call del
 
     MOV $11,  %rax      #The 11th systemcall is sys_munmap, which deallocates the memory

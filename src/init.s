@@ -1,4 +1,4 @@
-.globl init, addr, len, ptr, del
+.globl init, addr, len, ptr, del, keylen
 
 .data
 addr:                   #address of the VM allocated
@@ -7,6 +7,8 @@ len:                    #length of the VM allocated
     .quad 0x0
 ptr:                    #pointer to the unused part of the VM (relative to addr)
     .quad 0x0
+keylen:                 #Length of the key
+    .quad 0x0  
 
 
 .text
@@ -20,12 +22,19 @@ init:                   #Allocate memory
 allocate_safemem:
 
     MOV %rdi, len(,1)   #update len
+    MOV %rsi, keylen(,1)#update keylen
 
     push %r10
     push %r8
     push %r9
 
     MOV %rdi, %rsi      #size of the to-be-allocated memory
+  
+    MOV $2, %rdi        #MCL_FUTURE, so that every page in the future will not be mapped out to swap space
+    MOV $151, %rax      #sys_mlockall is the 151st system call in the linux x64 kernel
+    syscall
+
+    
     XOR %rdi, %rdi      #address of the to-be-allocated memory, NULL (no preference)
     MOV $0x2, %rdx      #0babc -> a: EXEC, b: WRITE, c: READ (prot), here we only want to be able to write into memory
     MOV $0x22,%r10      #flags, here private (0x02) and anonymus (0x20), so that it doesn't get swapped to unsafe diskspace 
@@ -35,7 +44,9 @@ allocate_safemem:
     syscall 
 
     MOV %rax, addr(,1)  #update addr
-    
+
+
+
     pop %r10
     pop %r8
     pop %r9
