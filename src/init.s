@@ -1,14 +1,21 @@
-.globl init, addr, len
+.globl init, addr, len, ptr, del
 
 .data
-addr:
+addr:                   #address of the VM allocated
     .quad 0x0
-len:
+len:                    #length of the VM allocated
+    .quad 0x0
+ptr:                    #pointer to the unused part of the VM (relative to addr)
     .quad 0x0
 
+
 .text
-init:
-    jmp allocate_safemem
+
+del:                    #Test_null writes some testdata to the VM, therefore deletes all the stored data
+    jmp test_null
+
+init:                   #Allocate memory
+    JMP allocate_safemem
 
 allocate_safemem:
 

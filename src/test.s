@@ -18,8 +18,7 @@ ok:
 .text
 _start:
     push %rdi
-    MOV $0xf, %rdi #Size of the memory to allocate
-    INC %rdi
+    MOV $0xfffff, %rdi #Size of the memory to allocate
     call init 
     
     CMP $1, %rax
@@ -30,11 +29,21 @@ _start:
     call print
     JMP end
 endok:
+
     MOV $ok, %rsi
     MOV $21, %rdx
     call print
 end:
-    MOV $60, %rax
+    call del
+
+    MOV $11,  %rax      #The 11th systemcall is sys_munmap, which deallocates the memory
+    MOV addr, %rdi      #address of the allocated memory
+    MOV len,  %rsi      #length of the allocated memory
+    syscall
+
+nope:
+    JMP nope
+    MOV $60, %rax       #exiting...
     XOR %rdi, %rdi
     syscall
 
