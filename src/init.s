@@ -48,7 +48,8 @@ test_null:
 
     MOV len, %r14
     MOV $0xffffffff, %r13       #store testdata in r13
-    xor %r12, %r12
+    XOR %r12, %r12
+
 iteration:
     ADD $8, %r12
     CMP %r12, %r14              #all good
@@ -67,6 +68,7 @@ test_bad:                       #Arrive here if something bad happened
     pop %r12
 
     MOV $0, %rax
+    sti
     ret
 test_good:                      #Arrive here if we have $len allocated bytes starting at $addr
     pop %r15
@@ -74,5 +76,5 @@ test_good:                      #Arrive here if we have $len allocated bytes sta
     pop %r13
     pop %r12
 
-    MOV $1, %rax  
+    MOV $1, %rax 
     ret
