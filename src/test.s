@@ -17,7 +17,6 @@ ok:
 
 .text
 _start:
-    push %rdi
     MOV $0xfffff, %rdi #Size of the memory to allocate
     call init 
     
@@ -42,7 +41,6 @@ end:
     syscall
 
 nope:
-    JMP nope
     MOV $60, %rax       #exiting...
     XOR %rdi, %rdi
     syscall
