@@ -31,14 +31,14 @@ allocate_safemem:
     MOV %rdi, %rsi      #size of the to-be-allocated memory
   
     MOV $2, %rdi        #MCL_FUTURE, so that every page in the future will not be mapped out to swap space
-    MOV $151, %rax      #sys_mlockall is the 151st system call in the linux x64 kernel
+    MOV $151, %rax      #sys_mlockall is the 151st system call in the linux x64 kernel, max 16MiB
     syscall
 
     
     XOR %rdi, %rdi      #address of the to-be-allocated memory, NULL (no preference)
     MOV $0x2, %rdx      #0babc -> a: EXEC, b: WRITE, c: READ (prot), here we only want to be able to write into memory
     MOV $0x22,%r10      #flags, here private (0x02) and anonymus (0x20), so that it doesn't get swapped to unsafe diskspace 
-    MOV $1,   %r8       #filedescriptor of output, 1 is the standard output
+    MOV $1,   %r8       #filedescriptor of output, 1 is the standard output]
     xor %r9,  %r9       #null the offset, we want the entire space
     MOV $9,   %rax      #sys_mmap is the 9th system call in the linux x64 kernel
     syscall 

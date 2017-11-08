@@ -18,7 +18,7 @@ ok:
 .text
 _start:
     MOV $0x800,  %rsi #Key length
-    MOV $0x01000000, %rdi #Size of the memory to allocate, 10 x keysize is recommended
+    MOV $0x01000000, %rdi #Size of the memory to allocate, 10 x keysize is a recommended minimum, 16MiB is the maximum
     call init 
     
     CMP $1, %rax
