@@ -47,9 +47,9 @@ allocate_safemem:
 
 
 
-    pop %r10
-    pop %r8
     pop %r9
+    pop %r8
+    pop %r10
 
     jmp test_null
 test_null:
@@ -65,34 +65,33 @@ test_null:
     JE  test_bad
 
     MOV len, %r14
-    MOV $0xffffffff, %r13       #store testdata in r13
+    MOVQ $0x0, %r13       #store testdata in r13
     XOR %r12, %r12
 
 iteration:
-    ADD $8, %r12
-    CMP %r12, %r14              #all good
+    CMP %r12, %r14            #in interval
     JLE test_good
-    MOV %r13, -8(%r15,%r12,1)   #Write the testdata to the last available address
+    MOV %r13, (%r15,%r12,1)   #Write the testdata to the last available address
 
-    MOV -8(%r15,%r12,1), %r11   #Reading back the data, checking for integrity
+    MOV (%r15,%r12,1), %r11   #Reading back the data, checking for integrity
     CMP %r11, %r13
     JNE test_bad
 
+    ADD $8, %r12
     JMP iteration
 test_bad:                       #Arrive here if something bad happened
-    pop %r15
-    pop %r14
-    pop %r13
     pop %r12
+    pop %r13
+    pop %r14
+    pop %r15
 
     MOV $0, %rax
-    sti
     ret
 test_good:                      #Arrive here if we have $len allocated bytes starting at $addr
-    pop %r15
-    pop %r14
-    pop %r13
     pop %r12
+    pop %r13
+    pop %r14
+    pop %r15
 
     MOV $1, %rax 
     ret

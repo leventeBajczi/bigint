@@ -17,7 +17,7 @@ ok:
 
 .text
 _start:
-    MOV $0x100,  %rsi #Key length in bytes, must be 8k+0
+    MOV $0x007ffff8,  %rsi #Key length in bytes, must be 8k+0
     MOV $0x01000000, %rdi #Size of the memory to allocate, 10 x (keysize+1) is a recommended minimum, 16MiB is the maximum
     call init 
     
@@ -35,6 +35,8 @@ endok:
     call print
 
     call compl
+    call add
+
 end:
     call del
 
