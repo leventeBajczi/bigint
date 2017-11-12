@@ -15,15 +15,12 @@ compl:
     ADD ptr , %r13
     
     MOV keylen, %r15
-    MOV keylen, %r15
-    INC %r15
+    ADD keylen, %r15
+    ADD $0x08,  %r15
 
     MOV $0x1, %r12
     push %r12
 loop:
-    CMP $0x1, %r15
-    JLE endloop
-
     MOV (%r13,%r15,1), %r14         #Read 8 bytes into register r14 
     XORQ $0xffffffffffffffff, %r14  #invert the digits one by one
     
@@ -36,12 +33,11 @@ loop:
     MOV %r14, (%r13,%r15,1)         #Write the two's complement of the number back into memory                
 
     SUB $8, %r15
-    JMP loop
+    CMP $0x0, %r15
+    JGE loop
 
 endloop:
-    pop %r12
-    AND $0x1, %r12
-    MOV %r12, (%r13,%r15,1)         #Write out the carry flag on the keylen+1st byte
+    popf
          
     pop %r12
     pop %r13

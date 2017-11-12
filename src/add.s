@@ -1,6 +1,6 @@
 .globl add
 
-#Adds two 2*keylen+2 length numbers (at ptr and ptr+2*keylen+2) and stores it in the latter
+#Adds two 2*keylen+2 length numbers (at ptr and ptr+2*keylen+2) and stores it in the former
 
 .text
 add:
@@ -8,7 +8,7 @@ add:
     push %r14   #current content
     push %r13   #current content 2
     push %r12   #starting address, addr+ptr
-    push %r11   #starting address 2, addr+ptr+keylen+1
+    push %r11   #starting address 2, addr+ptr+keylen+8
     push %r10   #to get the carry flag
 
     MOV addr, %r12
@@ -16,20 +16,17 @@ add:
 
     MOV %r12, %r11
     ADD keylen, %r11
-    INC %r11
+    ADD $0x08, %r11
     ADD keylen, %r11
-    INC %r11
+    ADD $0x08, %r11
 
     MOV keylen, %r15
     ADD keylen, %r15
-    INC %r15
+    ADD $0x08, %r15
 
     MOV $0x0, %r10                  #start with no carry
     push %r10
 loop:
-    CMP $0x1, %r15
-    JLE endloop
-
     MOV (%r12,%r15,1), %r14         #Read 8 bytes into register r14 
     MOV (%r11,%r15,1), %r13         #Read 8 bytes into register r13
     
@@ -46,12 +43,11 @@ join:
     MOV %r14, (%r12,%r15,1)         #Write the two number's sum back into memory                
 
     SUB $8, %r15
-    JMP loop
+    CMP $0x0, %r15
+    JGE loop
 
 endloop:
-    pop %r10
-    AND $0x1, %r10
-    MOV %r10, (%r12,%r15,1)         #Write out the carry flag on the keylen+1st byte
+    popf
 
     pop %r10
     pop %r11 

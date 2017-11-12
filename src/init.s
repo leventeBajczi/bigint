@@ -51,7 +51,6 @@ allocate_safemem:
     pop %r8
     pop %r10
 
-    jmp test_null
 test_null:
 
     push %r15
@@ -65,14 +64,15 @@ test_null:
     JE  test_bad
 
     MOV len, %r14
-    MOVQ $0x0, %r13       #store testdata in r13
+    MOV $0x0011223344556677, %r13       #store testdata in r13
     XOR %r12, %r12
 
 iteration:
     CMP %r12, %r14            #in interval
     JLE test_good
-    MOV %r13, (%r15,%r12,1)   #Write the testdata to the last available address
 
+    MOV %r13, (%r15,%r12,1)   #Write the testdata to the last available address
+    
     MOV (%r15,%r12,1), %r11   #Reading back the data, checking for integrity
     CMP %r11, %r13
     JNE test_bad
