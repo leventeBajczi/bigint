@@ -2,7 +2,7 @@
 
 #Creates two's complement from a number, effectively negating it
 
-#uses one unit of storage (keylen+1) after the current pos (ptr)
+#uses rwo unit of storage (2*keylen+2) after the current pos (ptr)
 
 .text
 compl:
@@ -15,11 +15,13 @@ compl:
     ADD ptr , %r13
     
     MOV keylen, %r15
+    MOV keylen, %r15
+    INC %r15
 
     MOV $0x1, %r12
     push %r12
 loop:
-    CMP $0x0, %r15
+    CMP $0x1, %r15
     JLE endloop
 
     MOV (%r13,%r15,1), %r14         #Read 8 bytes into register r14 

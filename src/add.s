@@ -1,6 +1,6 @@
 .globl add
 
-#Adds two keylen+1 length numbers (at ptr and ptr+keylen+1) and stores it in the latter
+#Adds two 2*keylen+2 length numbers (at ptr and ptr+2*keylen+2) and stores it in the latter
 
 .text
 add:
@@ -17,13 +17,17 @@ add:
     MOV %r12, %r11
     ADD keylen, %r11
     INC %r11
+    ADD keylen, %r11
+    INC %r11
 
     MOV keylen, %r15
+    ADD keylen, %r15
+    INC %r15
 
     MOV $0x0, %r10                  #start with no carry
     push %r10
 loop:
-    CMP $0x0, %r15
+    CMP $0x1, %r15
     JLE endloop
 
     MOV (%r12,%r15,1), %r14         #Read 8 bytes into register r14 
