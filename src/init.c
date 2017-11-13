@@ -24,7 +24,7 @@ boolean init(base *params)
 
 boolean allocate_safemem()
 {
-    if(!mlockall(MCL_FUTURE)) return false;           //Set all future mmaps unswappable
+    if(mlockall(MCL_FUTURE)) return false;           //Set all future mmaps unswappable
     addr = (base*) mmap(NULL, len, 0x3, 0x22, 1, 0);  //addr = NULL, len = len, prot = 0x2 | 0x1 (Read and write), flags = 0x20 | 0x2 (private and anonym), fd = 1 (standard out), offset = 0
     if(!addr) return false;
     return true;
@@ -39,7 +39,7 @@ boolean del()
 
 boolean test_mem()
 {   
-    base testdata = 0x0;
+    base testdata = 0xaabbccddeeff0012;
     for(base i = 0; i < len/8; i++)
     {
         *(addr+i) = testdata;

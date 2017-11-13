@@ -11,6 +11,9 @@ int main()
         abort();
     }
     compl();
+    add();
+
+    mul();
 
     while(1);
     return 0;

@@ -5,5 +5,8 @@
 #include <stdlib.h>
 #include "typedefs.h"
 #include "init.h"
+#include "compl.h"
+#include "add.h"
+#include "mul.h"
 
 #endif
