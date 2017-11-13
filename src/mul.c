@@ -6,6 +6,7 @@ extern base mulbit(base, base, base, base);
 
 boolean mul()
 {
+    base z = 0;
     base carry = 0;
     base offset = 0;
 
@@ -24,8 +25,15 @@ boolean mul()
             base place = (base)addr + (base)ptr + 4*keylen - 8 - j + offset;
             base second = (base)addr + (base)ptr + 2 * keylen - 8 - j;
             carry = mulbit(carry, i, second,  place);
+        } 
+        base check = *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset);
+        *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset) += carry;
+        z = 0;
+        while(check > *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z)){
+            z++;
+            check = *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z);
+            *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z) += carry;
         }
-        *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset) = carry;
         offset += 8;
     }
     carry = 0;
