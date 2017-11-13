@@ -11,9 +11,9 @@ boolean mul()
     base offset = 0;
 
     base nulldata = 0x0;
-    for(base i = 0; i < keylen*4; i++)
+    for(base i = 0; i < keylen; i++)
     {
-        *(base*)(addr + ptr + 2*keylen+i) = nulldata;
+        *(base*)(addr + ptr + 3*keylen+i) = nulldata;
     }
 
 
@@ -22,17 +22,17 @@ boolean mul()
         carry = 0;
         for(base j = 0; j <= keylen - 8; j+=8)
         {
-            base place = (base)addr + (base)ptr + 4*keylen - 8 - j + offset;
+            base place = (base)addr + (base)ptr + 7*keylen/2 - 8 - j + offset;
             base second = (base)addr + (base)ptr + 2 * keylen - 8 - j;
             carry = mulbit(carry, i, second,  place);
         } 
-        base check = *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset);
-        *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset) += carry;
+        base check = *(base*)((base)addr+(base)ptr+5*keylen/2 - 8 + offset);
+        *(base*)((base)addr+(base)ptr+5*keylen/2 - 8 + offset) += carry;
         z = 0;
-        while(check > *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z)){
+        while(check > *(base*)((base)addr+(base)ptr+5*keylen/2 - 8 + offset - z)){
             z+=8;
-            check = *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z);
-            *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z) += carry;
+            check = *(base*)((base)addr+(base)ptr+5*keylen/2 - 8 + offset - z);
+            *(base*)((base)addr+(base)ptr+5*keylen/2 - 8 + offset - z) += carry;
         }
         offset += 8;
     }
