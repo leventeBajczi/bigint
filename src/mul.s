@@ -25,10 +25,10 @@ mul:
     ADD $0x08, %r11
 
     MOV keylen, %r15
-    INC %r15
+    ADD $0x08, %r15
 
     MOV keylen, %r9
-    INC %r9
+    ADD $0x08, %r9
     push %r9
 outer_loop:
     CMP $0x0, %r15

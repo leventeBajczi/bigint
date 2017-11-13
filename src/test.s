@@ -17,7 +17,7 @@ ok:
 
 .text
 _start:
-    MOV $0x10,  %rsi #Key length in bytes, must be 16k+0
+    MOV $0x8,  %rsi #Key length in bytes, must be 16k+0
     MOV $0x100, %rdi #Size of the memory to allocate, 10 x (keysize+1) is a recommended minimum, 16MiB is the maximum
     call init 
     
