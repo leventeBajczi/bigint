@@ -30,7 +30,7 @@ boolean mul()
         *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset) += carry;
         z = 0;
         while(check > *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z)){
-            z+=8
+            z+=8;
             check = *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z);
             *(base*)((base)addr+(base)ptr+3*keylen - 8 + offset - z) += carry;
         }
