@@ -4,12 +4,13 @@ extern char error[100];
 
 int main()
 {
-    base params[2] = {0x100000, 0x200};
+    base params[2] = {0x80, 0x10};
     if(!init(params))
     {
         printf("%s", error);
         abort();
     }
+    compl();
 
     while(1);
     return 0;
