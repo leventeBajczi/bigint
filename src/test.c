@@ -23,7 +23,7 @@ extern base rest_op2_ptr;
 extern base rest_op2_len;
 */
 
-#define KEYLEN 0x1000
+#define KEYLEN 0x10
 
 int main()
 {
@@ -38,6 +38,7 @@ int main()
     }
     compl();
     add(0);
+    mul();
 
     return 0;
 }
