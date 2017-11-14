@@ -6,9 +6,9 @@
  #include <sys/mman.h>
 #include "typedefs.h"
 
-boolean test_mem();
-boolean del();
-boolean init(base*);
-boolean allocate_safemem();
+boolean test_mem(base*, base);
+boolean del(base**, base*, uint8_t);
+boolean init(base**, base*, uint8_t);
+boolean allocate_safemem(base*, base);
 
 #endif

@@ -1,12 +1,17 @@
 #include "mul.h"
 
-extern base keylen, addr, ptr;
+base mul_op1_ptr;
+base mul_op1_len;
+base mul_op2_ptr;
+base mul_op2_len;
+base mul_res_ptr;
+base mul_res_len;
 
 extern base mulbit(base, base, base, base);
 
 boolean mul()
 {
-    base z = 0;
+    /*base z = 0;
     base carry = 0;
     base offset = 0;
 
@@ -37,4 +42,5 @@ boolean mul()
         offset += 8;
     }
     carry = 0;
+    */
 }

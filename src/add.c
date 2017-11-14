@@ -1,14 +1,17 @@
 #include "add.h"
 
-extern base keylen, addr, ptr;
+base add_op1_ptr;
+base add_op1_len;
+base add_op2_ptr;
+base add_op2_len;
 
 extern base addbit(base, base, base);
 
 boolean add()
 {
     base carry = 0;
-    for(base i = addr + ptr + keylen*2 - 8; i >= addr + ptr; i-=8)
+    for(base i = add_op1_len - 8; i >= 0; i-=8)
     {
-        carry = addbit(carry, i, i+keylen*2);
+        carry = addbit(carry, add_op1_ptr + i, add_op2_ptr + i);
     }
 }
