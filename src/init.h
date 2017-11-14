@@ -8,7 +8,7 @@
 
 boolean test_mem(base*, base);
 boolean del(base**, base*, uint8_t);
-boolean init(base**, base*, uint8_t);
+boolean init(base**,base**, base*, uint8_t);
 boolean allocate_safemem(base*, base);
 
 #endif

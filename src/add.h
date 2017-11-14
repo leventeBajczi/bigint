@@ -3,6 +3,6 @@
 
 #include "typedefs.h"
 
-boolean add();
+boolean add(base);
 
 #endif

@@ -2,10 +2,11 @@
 
 char error[100];
 
-boolean init(base **ptrs, base *lens, uint8_t len)
+boolean init(base **ptrs, base **oplens, base *lens, uint8_t len)
 {
     for(int i = 0; i<len; i++)
     {
+        *(oplens[i]) = lens[i];
         if(!allocate_safemem(ptrs[i], lens[i])) 
         {
             strcpy(error, "Failed to allocate memory, quitting...\n\0");
