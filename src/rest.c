@@ -10,16 +10,24 @@ base rest_op1_len;
 base rest_op2_ptr;
 base rest_op2_len;
 
+extern base compl_op_ptr;
+extern base compl_op_len;
+
+extern base add_op1_ptr;
+extern base add_op1_len;
+extern base add_op2_ptr;
+extern base add_op2_len;
+
 boolean rest()
 {
-    //place rest_op2 into compl_op
+    cpy(rest_op2_ptr, rest_op2_len, compl_op_ptr, &compl_op_len);
     compl(0);
-    //place rest_op2 into add_op2
+    cpy(compl_op_ptr, compl_op_len, add_op2_ptr, &add_op2_len);
     for(base i = 8; i <= rest_op1_len; i+=8)
     {
-        while(compare(rest_op1_ptr, i, rest_op2_ptr, rest_op2_len))
+        while(compare(rest_op1_ptr, i, rest_op2_ptr, &rest_op2_len))
         {
-            //place rest_op1 into add_op1
+            cpy(rest_op1_ptr, rest_op1_len, add_op1_ptr, &add_op1_len);
             add(1);
         }
     }
