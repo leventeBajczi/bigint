@@ -20,15 +20,23 @@ extern base add_op2_len;
 
 boolean rest()
 {
+    base test = 0x03;
+    cpy(rest_op1_ptr, rest_op1_len, add_op1_ptr, &add_op1_len);
+    cpy((base)&test, sizeof(test), add_op2_ptr, &add_op2_len);
+    add(0);
+    cpy(add_op1_ptr, add_op1_len, rest_op1_ptr, &rest_op1_len);
+
+
     cpy(rest_op2_ptr, rest_op2_len, compl_op_ptr, &compl_op_len);
-    compl(0);
+    compl();
     cpy(compl_op_ptr, compl_op_len, add_op2_ptr, &add_op2_len);
     for(base i = sizeof(base); i <= rest_op1_len; i+=sizeof(base))
     {
-        while(compare(rest_op1_ptr, i, rest_op2_ptr, &rest_op2_len))
+        while(compare(rest_op1_ptr, i, rest_op2_ptr, rest_op2_len))
         {
             cpy(rest_op1_ptr, rest_op1_len, add_op1_ptr, &add_op1_len);
             add(1);
+            cpy(add_op1_ptr, add_op1_len, rest_op1_ptr, &rest_op1_len);
         }
     }
 

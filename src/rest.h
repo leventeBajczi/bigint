@@ -7,5 +7,5 @@
 #include "cpy.h"
 
 boolean rest();
-boolean compare();
+boolean compare(base, base, base, base);
 #endif
