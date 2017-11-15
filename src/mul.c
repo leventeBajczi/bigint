@@ -42,7 +42,7 @@ boolean mul()
         while(check > *(base*)( mul_res_ptr +  offset - z)){
             z+=8;
             check = *(base*)( mul_res_ptr + offset - z);
-            *(base*)( mul_res_ptr + offset - z) += carry;
+            *(base*)( mul_res_ptr + offset - z) += 1;
         }
         offset += 8;
     }
