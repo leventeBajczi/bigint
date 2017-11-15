@@ -40,5 +40,6 @@ int main()
     add(0);
     mul();
     rest();
+    while(1);
     return 0;
 }
