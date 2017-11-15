@@ -14,8 +14,8 @@ extern base complbit(base, base);
 boolean compl()
 {
     base carry = 1;
-    for(base i = compl_op_len; i >= 8; i-=8)            //After 0: Overflow, i>=0 will always be true -> -8 in the addbit function
+    for(base i = compl_op_len; i >= sizeof(base); i-=sizeof(base))            //After 0: Overflow, i>=0 will always be true -> -sizeof(base) in the addbit function
     {
-        carry = complbit(compl_op_ptr + i - 8, carry);
+        carry = complbit(compl_op_ptr + i - sizeof(base), carry);
     }
 }

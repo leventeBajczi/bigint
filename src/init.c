@@ -46,7 +46,7 @@ boolean del(base **ptrs, base *lens, uint8_t len)
 boolean test_mem(base* ptr, base len)
 {   
     base testdata = 0xaabbccddeeff0012;
-    for(base i = 0; i < len; i+=8)
+    for(base i = 0; i < len; i+=sizeof(base))
     {
         *(base*)(*ptr+i) = testdata;
         if(*(base*)(*ptr+i) != testdata) return false;

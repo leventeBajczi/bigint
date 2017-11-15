@@ -22,28 +22,28 @@ boolean mul()
     base offset = 0;
 
     base nulldata = 0x0;
-    for(base i = 0; i < mul_res_len; i+=8)
+    for(base i = 0; i < mul_res_len; i+=sizeof(base))
     {
         *(base*)(mul_res_ptr + i) = nulldata;
     }
 
-    for(base i = mul_op1_len; i >= 8 ; i-=8)
+    for(base i = mul_op1_len; i >= sizeof(base) ; i-=sizeof(base))
     {
         carry = 0;
-        for(base j = 0; j <= mul_op2_len - 8; j+=8)
+        for(base j = 0; j <= mul_op2_len - sizeof(base); j+=sizeof(base))
         {
             base place = mul_res_ptr + mul_res_len/2 - j + offset;
-            base second = mul_op2_ptr + mul_op2_len - 8 - j;
-            carry = mulbit(carry, mul_op1_ptr + i - 8, second,  place);
+            base second = mul_op2_ptr + mul_op2_len - sizeof(base) - j;
+            carry = mulbit(carry, mul_op1_ptr + i - sizeof(base), second,  place);
         } 
         base check = *(base*)( mul_res_ptr + offset);
         *(base*)( mul_res_ptr + offset) += carry;
         z = 0;
         while(check > *(base*)( mul_res_ptr +  offset - z)){
-            z+=8;
+            z+=sizeof(base);
             check = *(base*)( mul_res_ptr + offset - z);
             *(base*)( mul_res_ptr + offset - z) += 1;
         }
-        offset += 8;
+        offset += sizeof(base);
     }
 }

@@ -19,13 +19,13 @@ boolean add(base c)
 {
     base c_save = c;
     base carry = 0;
-    for(base i = add_op1_len; i >= 8; i-=8)                             //After 0: Overflow, i>=0 will always be true -> -8 in the addbit function
+    for(base i = add_op1_len; i >= sizeof(base); i-=sizeof(base))                             //After 0: Overflow, i>=0 will always be true -> -sizeof(base) in the addbit function
     {
         if(add_op1_len - add_op2_len >= i)
         {
             c = c_save; //needs reset
-            carry = addbit(carry, (base)&c, add_op1_ptr + i - 8);
+            carry = addbit(carry, (base)&c, add_op1_ptr + i - sizeof(base));
         }
-        else carry = addbit(carry, add_op2_ptr + i - 8 - add_op1_len + add_op2_len, add_op1_ptr + i - 8);
+        else carry = addbit(carry, add_op2_ptr + i - sizeof(base) - add_op1_len + add_op2_len, add_op1_ptr + i - sizeof(base));
     }
 }

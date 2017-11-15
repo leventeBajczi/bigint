@@ -8,5 +8,6 @@
 #include "compl.h"
 #include "add.h"
 #include "mul.h"
+#include "rest.h"
 
 #endif
