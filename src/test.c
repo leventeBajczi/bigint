@@ -16,12 +16,12 @@ extern base mul_op2_ptr;
 extern base mul_op2_len;
 extern base mul_res_ptr;
 extern base mul_res_len;
-/*
+
 extern base rest_op1_ptr;
 extern base rest_op1_len;
 extern base rest_op2_ptr;
 extern base rest_op2_len;
-*/
+
 
 #define KEYLEN 0x10
 
