@@ -46,5 +46,4 @@ boolean mul()
         }
         offset += 8;
     }
-    carry = 0;
 }
