@@ -20,13 +20,6 @@ extern base add_op2_len;
 
 boolean rest()
 {
-    base test = 0x03;
-    cpy(rest_op1_ptr, rest_op1_len, add_op1_ptr, &add_op1_len);
-    cpy((base)&test, sizeof(test), add_op2_ptr, &add_op2_len);
-    add(0);
-    cpy(add_op1_ptr, add_op1_len, rest_op1_ptr, &rest_op1_len);
-
-
     cpy(rest_op2_ptr, rest_op2_len, compl_op_ptr, &compl_op_len);
     compl();
     cpy(compl_op_ptr, compl_op_len, add_op2_ptr, &add_op2_len);
