@@ -9,5 +9,6 @@
 #include "base_arithmetic/headers/add.h"
 #include "base_arithmetic/headers/mul.h"
 #include "advanced_arithmetic/headers/rest.h"
+#include "interfacing/headers/operations.h"
 
 #endif

@@ -1,5 +1,4 @@
 #include "test.h"
-
 extern char error[100];
 
 extern base compl_op_ptr;
@@ -39,5 +38,14 @@ int main()
     add(0);
     mul();
     rest();
+
+    uint8_t a[8] = {1, 0, 0, 0, 0, 0, 0, 254};
+    uint8_t b[8] = {254, 0, 0, 0, 0, 0, 0, 255};
+    uint8_t *r = addbig(a, 8, b, 8);
+    free(r);
+
+
+
+
     return 0;
 }

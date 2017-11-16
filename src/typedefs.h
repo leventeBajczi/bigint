@@ -15,3 +15,6 @@
 #ifndef false
 #define false 0
 #endif
+
+
+#define DEV
