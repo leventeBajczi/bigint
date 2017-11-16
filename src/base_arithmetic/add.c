@@ -1,4 +1,4 @@
-#include "add.h"
+#include "headers/add.h"
 
 /*
 Takes two operands, and puts their sum into the first operand's place.
@@ -28,4 +28,6 @@ boolean add(base c)
         }
         else carry = addbit(carry, add_op2_ptr + i - sizeof(base) - add_op1_len + add_op2_len, add_op1_ptr + i - sizeof(base));
     }
+
+    return false;
 }

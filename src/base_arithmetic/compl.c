@@ -1,4 +1,4 @@
-#include "compl.h"
+#include "headers/compl.h"
 
 /*
 Takes an operand and negates it (creates it's two's complement).
@@ -18,4 +18,6 @@ boolean compl()
     {
         carry = complbit(compl_op_ptr + i - sizeof(base), carry);
     }
+
+    return true;
 }

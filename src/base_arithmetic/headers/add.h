@@ -1,7 +1,7 @@
 #ifndef ADD_H
 #define ADD_H
 
-#include "typedefs.h"
+#include "../../typedefs.h"
 
 boolean add(base);
 

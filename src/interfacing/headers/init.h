@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
  #include <sys/mman.h>
-#include "typedefs.h"
+#include "../../typedefs.h"
 
 boolean test_mem(base*, base);
 boolean del(base**, base*, uint8_t);

@@ -1,7 +1,7 @@
 #ifndef COMPL_H
 #define COMPL_H
 
-#include "typedefs.h"
+#include "../../typedefs.h"
 
 boolean compl();
 

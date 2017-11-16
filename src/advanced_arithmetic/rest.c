@@ -1,4 +1,4 @@
-#include "rest.h"
+#include "headers/rest.h"
 
 /*
 Takes two operands (a and m) and calculate a mod m.
@@ -32,6 +32,8 @@ boolean rest()
             cpy(add_op1_ptr, add_op1_len, rest_op1_ptr, &rest_op1_len);
         }
     }
+
+    return true;
 
 }
 

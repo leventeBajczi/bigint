@@ -1,4 +1,4 @@
-#include "mul.h"
+#include "headers/mul.h"
 
 /*
 Takes two operands and calculates their product. 
@@ -46,4 +46,6 @@ boolean mul()
         }
         offset += sizeof(base);
     }
+
+    return true;
 }
