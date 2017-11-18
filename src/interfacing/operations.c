@@ -220,9 +220,3 @@ boolean setbig(uint8_t* a, base alen, uint8_t to)
     *(uint8_t*)((base)a+alen-1) = to;
     return true;
 }
-
-
-uint8_t* isprime(uint8_t* p, base plen, base exp){
-
-return NULL;
-}
