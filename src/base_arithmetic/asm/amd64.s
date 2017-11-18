@@ -1,4 +1,4 @@
-.globl complbit, addbit, mulbit
+.globl complbit, addbit, mulbit, shiftright, shiftleft
 
 .text
 complbit:
@@ -39,5 +39,23 @@ nocarry1:
     ADDQ $0x01, %rdx
 nocarry:
     MOV %rdx, %rax
+
+    ret
+
+
+shiftright:
+    SHRD $1, %rsi, (%rdi)
+    pushf
+    pop %rax
+    AND $0x01, %rax
+
+    ret
+
+
+shiftleft:
+    SHLD $1, %rsi, (%rdi)
+    pushf
+    pop %rax
+    AND $0x01, %rax
 
     ret

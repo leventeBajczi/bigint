@@ -1,26 +1,25 @@
-#include "headers/rest.h"
+#include "headers/powmod.h"
 /*
 Takes two operands (a and m) and calculate a mod m.
 The result replaces op1.
 */
 
-base rest_op1_ptr;
-base rest_op1_len;
-base rest_op2_ptr;
-base rest_op2_len;
+base powm_op1_ptr;
+base powm_op1_len;
+base powm_op2_ptr;
+base powm_op2_len;
+base powm_op3_ptr;
+base powm_op3_len;
 
-extern base compl_op_ptr;
-extern base compl_op_len;
+extern base res_op1_ptr;
+extern base res_op1_len;
+extern base res_op2_ptr;
+extern base res_op2_len;
 
-extern base add_op1_ptr;
-extern base add_op1_len;
-extern base add_op2_ptr;
-extern base add_op2_len;
 
-extern base mul_res_ptr;
-extern base mul_res_len;
-boolean rest()
+boolean powmod()
 {
+    base i = 0;
     cpy(rest_op2_ptr, rest_op2_len, mul_res_ptr, &mul_res_len); //merely saving it for further calculations
     while(((uint8_t*)rest_op2_ptr)[7] == 0 && compare(rest_op1_ptr, rest_op1_len, rest_op2_ptr, rest_op2_len))
     {

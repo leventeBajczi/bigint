@@ -3,6 +3,7 @@
 
 #include "../../typedefs.h"
 #include "../../base_arithmetic/headers/add.h"
+#include "../../base_arithmetic/headers/shift.h"
 #include "../../base_arithmetic/headers/compl.h"
 #include "../../interfacing/headers/cpy.h"
 

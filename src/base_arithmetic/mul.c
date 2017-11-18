@@ -34,7 +34,7 @@ boolean mul()
         {
             base place = mul_res_ptr + mul_res_len/2 - j + offset;
             base second = mul_op2_ptr + mul_op2_len - sizeof(base) - j;
-            carry = mulbit(carry, mul_op1_ptr + i - sizeof(base), second,  place);
+            carry = mulbit(carry, mul_op1_ptr + mul_op1_len - i, second,  place);
         } 
         base check = *(base*)( mul_res_ptr + offset);
         *(base*)( mul_res_ptr + offset) += carry;
