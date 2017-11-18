@@ -39,13 +39,14 @@ boolean del(base **ptrs, base *lens, uint8_t len)
     for(int i = 0; i<len; i++)
     {
         if(!test_mem(ptrs[i], lens[i])) return false;
+        munmap(ptrs[i], lens[i]);
     }
     return true;
 }
 
 boolean test_mem(base* ptr, base len)
 {   
-    base testdata = 0xaabbccddeeff0012;
+    base testdata = 0x00;
     for(base i = 0; i < len; i+=sizeof(base))
     {
         *(base*)(*ptr+i) = testdata;

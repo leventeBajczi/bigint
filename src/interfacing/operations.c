@@ -20,6 +20,15 @@ extern base rest_op1_ptr;
 extern base rest_op2_len;
 extern base rest_op2_ptr;
 
+extern base powm_op1_ptr;
+extern base powm_op1_len;
+extern base powm_op2_ptr;
+extern base powm_op2_len;
+extern base powm_op3_ptr;
+extern base powm_op3_len;
+extern base powm_res_ptr;
+extern base powm_res_len;
+
 uint8_t* addbig(uint8_t* a, base alen, uint8_t* b , base blen)
 {
     uint8_t* result = (uint8_t*)malloc(sizeof(uint8_t)*alen);
@@ -87,12 +96,13 @@ uint8_t* subbig(uint8_t* a, base alen, uint8_t* b , base blen)
 }
 uint8_t* mulbig(uint8_t* a, base alen, uint8_t* b , base blen)
 {
-    setbuf(stdout, NULL);
+   
     mul_res_len = alen + blen;
 
     uint8_t* result = (uint8_t*)malloc(sizeof(uint8_t)*mul_res_len);
 
     #ifdef DEV
+    setbuf(stdout, NULL);
     printf("0x");
     #endif
 
@@ -150,19 +160,68 @@ uint8_t* restbig(uint8_t* a, base alen, uint8_t* m , base mlen)
     printf(" = 0x");
     #endif
 
-    store(result, &alen, rest_op1_ptr, rest_op1_len);
+    store(result, &alen, rest_op1_ptr + (alen - mlen), mlen);
     #ifdef DEV
     printf("\n");
     #endif
 
     return result;
-return NULL;
 }
-uint8_t* powmod(uint8_t* a, base alen, uint8_t* b , base blen, uint8_t* m , base mlen)
+uint8_t* powmodulo(uint8_t* a, base alen, uint8_t* b , base blen, uint8_t* m , base mlen)
 {
+    uint8_t* mhelp = (uint8_t*)malloc(sizeof(uint8_t)*mlen);
+    uint8_t* bhelp = (uint8_t*)malloc(sizeof(uint8_t)*blen);
+    memcpy(mhelp, m, mlen);
+    memcpy(bhelp, b, blen);
+    uint8_t* result = (uint8_t*)malloc(sizeof(uint8_t)*mlen);
+    uint8_t* resulthelp = (uint8_t*)malloc(sizeof(uint8_t)*mlen*2);
+    uint8_t carry = 0, carryhelp;
+    setbig(result, mlen, 0x01);
+    do
+    {
+        carry = 0;
+        if(b[blen-1] % 2)
+        {
+            resulthelp = mulbig(result, mlen, a, alen);
+            memcpy(m, mhelp, mlen);
+            result = restbig(resulthelp, 2*mlen, m, mlen);
+            memcpy(b, bhelp, blen);
+        }
+        
+        for(base i = (base)b; i<(base)b+blen; i++)
+        {
+            carryhelp = carry;
+            carry = (*(uint8_t*)i) & 0x01;
+            *(uint8_t*)i = carryhelp*0x80 + ((*(uint8_t*)i) / 2);
+        }
+        memcpy(bhelp, b, blen);
+        resulthelp = mulbig(a, alen, a, alen);
+        memcpy(m, mhelp, mlen);
+        a = restbig(resulthelp, 2*alen, m, mlen);
+        memcpy(b, bhelp, blen);
+    }while(!isnull(b, blen));
 
-return NULL;
+    return result;
 }
+boolean isnull(uint8_t* a, base alen)
+{
+    for(base i = (base)a; i<(base)a+alen; i++)
+    {
+        if(*(uint8_t*)i != 0) return false;
+    }
+    return true;
+}
+boolean setbig(uint8_t* a, base alen, uint8_t to)
+{
+    for(base i = (base)a; i<(base)a+alen-1; i++)
+    {
+        *(uint8_t*)i = 0;
+    }
+    *(uint8_t*)((base)a+alen-1) = to;
+    return true;
+}
+
+
 uint8_t* isprime(uint8_t* p, base plen, base exp){
 
 return NULL;

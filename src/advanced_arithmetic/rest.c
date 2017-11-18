@@ -47,7 +47,7 @@ boolean rest()
 
 }
 
-//returns true if a is bigger than or equals to b, returns false otherwise
+//returns true if a is bigger than or equals to b (in which case it is 1, rather than 255), returns false otherwise
 
 boolean compare(base a_ptr, base a_len, base b_ptr, base b_len)
 {
@@ -72,7 +72,7 @@ boolean compare(base a_ptr, base a_len, base b_ptr, base b_len)
         if(*(base*)(a_ptr+i) > *(base*)(b_ptr+i)) return true;
         if(*(base*)(a_ptr+i) < *(base*)(b_ptr+i)) return false;
     }
-    return true;
+    return 1;
 
 
 }
