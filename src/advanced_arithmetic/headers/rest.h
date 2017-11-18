@@ -8,5 +8,6 @@
 #include "../../interfacing/headers/cpy.h"
 
 boolean rest();
+
 boolean compare(base, base, base, base);
 #endif

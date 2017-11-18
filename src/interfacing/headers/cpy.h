@@ -4,6 +4,6 @@
 #include <string.h>
 #include "../../typedefs.h"
 
-boolean cpy(base, base, base, base*);
+boolean cpy(base, base, base, base *);
 
 #endif

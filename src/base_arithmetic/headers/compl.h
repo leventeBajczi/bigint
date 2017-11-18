@@ -3,6 +3,6 @@
 
 #include "../../typedefs.h"
 
-boolean compl();
+boolean compl ();
 
 #endif
