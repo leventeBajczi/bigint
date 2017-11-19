@@ -229,3 +229,17 @@ boolean setbig(uint8_t *a, base alen, uint8_t to)
    *(uint8_t *)((base)a + alen - 1) = to;
    return(true);
 }
+
+boolean isprime(uint8_t *a, base alen)
+{
+    mpz_t prime;
+    mpz_init(prime);
+    mpz_import(prime, alen, 1, sizeof(a[0]), 0, 0, a);
+    if(mpz_probab_prime_p(prime, 35)) 
+    {
+        mpz_clear(prime);
+        return true;
+    }
+    mpz_clear(prime);
+    return false;
+}
